@@ -1,0 +1,10 @@
+this repository contains two parts:
+
+Trees:
+  Basic operation: tree Rotations..
+  Basic judgement: valid bst? same tree? mirror?
+  Basic parameters: depth, longest path of nodes, largest sum from node to node
+
+
+
+Graphs:
