@@ -27,16 +27,17 @@ public void findAllPathUndirected (Graph g, Node source, Node dest){
 public void DFS(Graph g, boolean[] visit, int[] path, int u, int dest, int level) {
 
     if (level == path.length) return;
-	  path[level] = u;
-	  if (u == dest) {
-	      printPath(level+1);
-	      return;
-	  }
-	  visit[u] = true;
-	  for (int v : g.adj[u] )
-	    if (!visit[v]) 
-	        DFS(g, visit, path, v, dest, level + 1);
-      visit[u] = false;
+    
+    path[level] = u;
+    if (u == dest) {
+      printPath(level+1);
+      return;
+    }
+    visit[u] = true;
+    for (int v : g.adj[u] ){
+	 if (!visit[v]) 
+	     DFS(g, visit, path, v, dest, level + 1);
+    visit[u] = false;
     }
     
 }
