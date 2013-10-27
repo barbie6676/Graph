@@ -9,6 +9,36 @@ public TreeNode LCA(TreeNode root, TreeNode p, TreeNode q) {
 	  return L !=null? L : R;  // either one of p,q is on one side OR p,q is not in L&R subtrees
 }
 
+// O(n) time O(1) space if parent pointers exist
+Public int getHeight(TreeNode p) {
+	int height = 0;
+	while (p!=null) {
+		height++;
+		p = p.parent;
+	}
+	return height;
+}
+ 
+// As root->parent is NULL, we don't need to pass root in.
+Public TreeNode LCA(TreeNode root, TreeNode p, TreeNode q) {
+	int h1 = getHeight(p);
+	int h2 = getHeight(q);
+	// swap both nodes in case p is deeper than q.
+	if (h1 > h2) {
+		return LCA(root, q, p);
+	}
+	// invariant: h1 <= h2.
+	int dh = h2 - h1;
+	for (int h = 0; h < dh; h++)
+		q = q.parent;
+		while (p != null&& q != null) {
+			if (p == q) return p;
+			p = p.parent;
+			q = q.parent;
+		}
+	return null;  // p and q are not in the same tree
+}
+
 // non efficient recursion
 
 public TreeNode commonAncester (TreeNode root, TreeNode p, TreeNode q) {
