@@ -1,14 +1,24 @@
+//bottom up solution recursion
+
+public TreeNode LCA(TreeNode root, TreeNode p, TreeNode q) {
+	  if (root==null) return null;
+	  if (root == p || root == q) return root;
+	  TreeNode L = LCA(root.left, p, q);
+	  TreeNode R = LCA(root.right, p, q);
+	  if (L != null&& R != null) return root;  // if p and q are on both sides
+	  return L !=null? L : R;  // either one of p,q is on one side OR p,q is not in L&R subtrees
+}
 
 // non efficient recursion
 
 public TreeNode commonAncester (TreeNode root, TreeNode p, TreeNode q) {
-  // neither of p or q is null
-  if (covers(root.left, p)&&covers(root.left, q))
-    return commonAncester(root.left, p, q);
-  if (covers(root.right, p)&&covers(root.right, q))
-    return commonAncester(root.right, p, q);
-    
-  return root;
+	  // neither of p or q is null
+	  if (covers(root.left, p)&&covers(root.left, q))
+	    return commonAncester(root.left, p, q);
+	  if (covers(root.right, p)&&covers(root.right, q))
+	    return commonAncester(root.right, p, q);
+	    
+	  return root;
     
 }
 
