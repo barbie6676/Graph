@@ -7,7 +7,7 @@ static in BLACK = -1;
 
 public void BFS(Graph g, Vertex s) {
     Queue<Vertex> q = new LinkedList<Vertex>();
-    for (Vertexh u : g.Vset()){              //for each vertex u in V[G] except s.
+    for (Vertex u : g.Vset()){              //for each vertex u in V[G] except s.
          if (u!=s){
             u.color = WHITE;
             u.dist =  Integer.MAX_VALUE;
@@ -102,4 +102,36 @@ public boolean isConnected (Graph g, Vertex start, Vertex end) {
     }
     
     return false;
+}
+
+public void  dijkstra(Graph g , Vertex s){
+       for (Vertex u : g.Veset(){                           // Initializations
+           
+            u.color = WHITE;
+            u.dist =  Integer.MAX_VALUE;
+            u.succ =  null;
+                                   // Previous node in optimal path from source
+       }
+       
+        s.dist  = 0;    
+        s.color = GRAY;    // Distance from source to itself is zero
+        Queue<Vertex> q = new PriorityQueue<Vertex>(Vertex.dist);
+        q.add(s);                                 // Start off with the source node
+        
+        Vertex u = null;                                                     
+        while (!q.isEmpty()){                                // The main loop
+            u = q.poll();//vertex in Q with smallest distance in dist[] and has not been visited;  /
+
+            for (Vertex v : g.adj.get(u) ){     
+                int alt = u.dist + dist_between(u, v);          // accumulate shortest dist from source
+                if (alt < v.dist && v.color == WHITE ){   
+                    v.color = GRAY;
+                    v.dist  = alt;                          // keep the shortest dist from src to v
+                    v.succ = u;
+                    q.add(v);                          // Add unvisited v into the Q to be processed
+                }
+            }
+            
+            u.color = BLACK; // mark this node as visited
+        }
 }
