@@ -16,6 +16,7 @@ public successor (TreeNode e) {
     while (parent != null) {
       if (parent.left == e) return parent;
       e = parent;
+      parent = e.parent;
     }
     return parent;
   }
