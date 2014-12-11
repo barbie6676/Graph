@@ -1,0 +1,30 @@
+def generateCode2(alphebat, k):
+  n = len(alphebat)
+  hash = {}
+  for key in getAllNodes(alphebat, k-1):
+    hash[key] = 0
+  result = ''
+  result += alphebat[0]*k
+  hash[alphebat[0]*(k-1)]+= 1
+  i = 1
+  while i < n**k - k + 1:
+    key = result[i:i+k-1]
+    #print "key:%s -> " % (key)
+    if key in hash:
+      base = result[i+1:i+k-1]
+      nextKey = base + alphebat[hash[key]]
+      if nextKey in hash:
+        result += alphebat[hash[key]]
+        hash[key] += 1
+        if hash[key] == n:
+          hash.pop(key, None)
+      else:
+        print "key:" + str(key)
+        hash[key] += 1
+        result += alphebat[hash[key]]
+        hash[key] += 1
+        if hash[key] == n:
+          hash.pop(key, None)
+        # print "current:%s" % result
+    i += 1
+  return result
