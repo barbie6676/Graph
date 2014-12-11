@@ -1,3 +1,14 @@
+def getAllNodes(alphebat, k):
+  results = []
+  if k == 1:
+    results = list(alphebat)
+  elif k > 0:
+    sublist = getAllNodes(alphebat, k-1)
+    for first in alphebat:
+      for elem in sublist:
+        results.append(first + elem)
+  return results
+  
 def generateCode2(alphebat, k):
   n = len(alphebat)
   hash = {}
